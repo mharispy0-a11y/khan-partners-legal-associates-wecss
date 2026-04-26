@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khan & Partners Legal Associates</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #16213e; /* Dark Navy */
+            --secondary-color: #1a1a2e; /* Even Darker Navy/Charcoal */
+            --accent-color: #c9a96e; /* Gold */
+            --text-light: #f4f4f4;
+            --text-dark: #333;
+            --neutral-bg: #e0e0e0;
+            --neutral-light: #fbfbfb;
+            --neutral-dark: #555;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            box-sizing: border-box;
+        }
+
+        *, *::before, *::after {
+            box-sizing: inherit;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--neutral-light);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+            line-height: 1.2;
+            margin-top: 0;
+        }
+
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 1.8rem; }
+        h4 { font-size: 1.4rem; }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background-color: var(--secondary-color);
+            padding: 1rem 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .navbar .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            white-space: nowrap;
+        }
+
+        .navbar nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .navbar nav a {
+            color: var(--text-light);
+            font-weight: 400;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .navbar nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .navbar nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hamburger Menu for Mobile */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            background: transparent;
+            border: none;
+            padding: 0;
+            z-index: 1001;
+        }
+
+        .hamburger .bar {
+            width: 100%;
+            height: 3px;
+            background-color: var(--text-light);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.open .hamburger .bar:nth-child(1) { transform: translateY(11px) rotate(45deg); }
+        .navbar.open .hamburger .bar:nth-child(2) { opacity: 0; }
+        .navbar.open .hamburger .bar:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+            scroll-margin-top: 80px; /* Offset for sticky navbar */
+            position: relative;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--neutral-bg);
+        }
+
+        /* Hero Section */
+        #home {
+            background: url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
+            color: var(--text-light);
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        #home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(rgba(22, 33, 62, 0.8), rgba(26, 26, 46, 0.8));
+            z-index: 1;
+        }
+
+        #home .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        #home h1 {
+            color: var(--accent-color);
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        #home p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            border: 2px solid var(--accent-color);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-color);
+            color: var(--accent-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        /* About Section */
+        #about .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+        }
+
+        #about .about-content {
+            padding-right: 40px;
+        }
+
+        #about h2 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        #about h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        #about p {
+            font-size: 1.1rem;
+            color: var(--neutral-dark);
+        }
+
+        #about .about-image {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        #about .about-image img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        #about .about-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            width: calc(100% - 40px);
+            height: calc(100% - 40px);
+            border: 3px solid var(--accent-color);
+            border-radius: 8px;
+            z-index: -1;
+        }
+
+        /* Services Section */
+        #services {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        #services h2 {
+            color: var(--accent-color);
+            margin-bottom: 3rem;
+        }
+
+        #services .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .service-card {
+            background-color: var(--secondary-color);
+            padding: 2.5rem;
+            border-radius: 8px;
+            text-align: left;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-bottom: 4px solid var(--accent-color);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            background-color: #2b3a5b; /* Slightly lighter secondary */
+        }
+
+        .service-card h3 {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            padding-left: 35px;
+            position: relative;
+        }
+
+        .service-card h3::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 15px;
+            height: 15px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            box-shadow: 0 0 0 5px rgba(201, 169, 110, 0.3);
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            font-weight: 300;
+        }
+
+        /* FAQs Section */
+        #faqs {
+            background-color: var(--neutral-light);
+            text-align: center;
+        }
+
+        #faqs h2 {
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        #faqs h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .faq-item {
+            background-color: #fff;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid #eee;
+        }
+
+        .faq-question {
+            padding: 1.2rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            color: var(--primary-color);
+            background-color: var(--neutral-bg);
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background-color: #d0d0d0;
+        }
+
+        .faq-question span {
+            font-size: 1.5rem;
+            line-height: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+            color: var(--neutral-dark);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px; /* Adjust based on expected content length */
+            padding: 1.2rem 1.5rem;
+        }
+
+        .faq-item.active .faq-question {
+            background-color: var(--neutral-light);
+        }
+
+        .faq-item.active .faq-question span {
+            transform: rotate(45deg);
+        }
+
+        /* Contact Section */
+        #contact {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+        }
+
+        #contact h2 {
+            color: var(--accent-color);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        #contact .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        #contact .contact-info p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #contact .contact-info p strong {
+            color: var(--accent-color);
+            font-family: 'Playfair Display', serif;
+        }
+
+        #contact .contact-info a {
+            color: var(--text-light);
+            transition: color 0.3s ease;
+        }
+
+        #contact .contact-info a:hover {
+            color: var(--accent-color);
+        }
+
+        .contact-form {
+            background-color: var(--secondary-color);
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-top: 4px solid var(--accent-color);
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+            font-weight: 700;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #333;
+            color: var(--text-light);
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+        }
+
+        .contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .contact-form input[type="text"]:focus,
+        .contact-form input[type="email"]:focus,
+        .contact-form textarea:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(201, 169, 110, 0.4);
+        }
+
+        .contact-form button {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: var(--text-light);
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2.5rem 0;
+            font-size: 0.9rem;
+            border-top: 5px solid var(--primary-color);
+        }
+
+        .footer .contact-footer-links {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footer .contact-footer-links a {
+            color: var(--text-light);
+        }
+
+        .footer .contact-footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            h1 { font-size: 3.5rem; }
+            h2 { font-size: 2rem; }
+            h3 { font-size: 1.3rem; }
+            #home p { font-size: 1.2rem; }
+
+            .navbar nav {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-content {
+                padding: 0 15px;
+            }
+
+            .navbar .logo {
+                font-size: 1.5rem;
+            }
+
+            .navbar nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--secondary-color);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                padding: 1rem 0;
+                text-align: center;
+            }
+
+            .navbar.open nav {
+                display: flex;
+            }
+
+            .navbar nav a {
+                padding: 0.8rem 0;
+                font-size: 1.1rem;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            h1 { font-size: 2.8rem; }
+            #home p { font-size: 1rem; }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 2rem;
+            }
+
+            #about .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            #about .about-content {
+                padding-right: 0;
+            }
+
+            #about .about-image {
+                padding-left: 0;
+            }
+            #about .about-image::before {
+                top: -10px;
+                left: 10px;
+                width: calc(100% - 20px);
+                height: calc(100% - 20px);
+            }
+
+            #services .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card {
+                padding: 2rem;
+            }
+
+            #contact .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .contact-form {
+                padding: 2rem;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            .navbar .logo {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="navbar-content">
+            <a href="#home" class="logo">Khan & Partners Legal Associates</a>
+            <button class="hamburger" aria-label="Toggle navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home">
+            <div class="hero-content">
+                <h1>Expert Corporate Law Services for Businesses in Lahore</h1>
+                <p>Established 12 years, providing comprehensive legal solutions</p>
+                <div class="cta-buttons">
+                    <a href="tel:03007654321" class="btn btn-primary">Book a Consultation</a>
+                    <a href="#services" class="btn btn-secondary">View Menu</a> <!-- As per critical instruction -->
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-content">
+                        <h2>About Our Firm</h2>
+                        <p>Khan & Partners Legal Associates has been providing expert corporate law services to businesses in Lahore for over a decade. With a team of experienced lawyers, we offer comprehensive solutions to help our clients achieve their strategic goals. Our commitment to meticulous research, strategic advice, and robust representation ensures that your business navigates the complexities of corporate law with confidence and success.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1574026366057-0a755d787033?auto=format&fit=crop&w=1600&q=80" alt="Legal professional writing notes">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services">
+            <div class="container">
+                <h2>Our Areas of Expertise</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>Corporate Contracts</h3>
+                        <p>Drafting and reviewing contracts to ensure compliance with local laws.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Mergers & Acquisitions Advisory</h3>
+                        <p>Guiding clients through the M&A process to achieve strategic goals.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Commercial Litigation</h3>
+                        <p>Representing clients in court and negotiating settlements for commercial disputes.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Regulatory Compliance</h3>
+                        <p>Ensuring clients' businesses meet regulatory requirements and avoid penalties.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Employment Law</h3>
+                        <p>Providing guidance on employment law matters to minimize risk and maximize benefits.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Intellectual Property Protection</h3>
+                        <p>Protecting clients' intellectual property rights through patents, trademarks, and copyrights.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faqs">
+            <div class="container">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            What areas of law do you specialize in? <span>+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Corporate contracts, mergers & acquisitions advisory, commercial litigation, regulatory compliance, employment law, intellectual property protection.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How long has your firm been in operation? <span>+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Khan & Partners Legal Associates has been established for over 12 years, providing expert legal services to businesses in Lahore.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            What makes your services unique? <span>+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Our team of experienced lawyers provides personalized attention and expert guidance to help our clients achieve their strategic goals, focusing on practical and effective legal solutions.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Do you offer free consultations? <span>+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, we offer free consultations to discuss your legal needs and understand how we can best assist your business.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Get in Touch with Our Legal Experts</h2>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3>Contact Information</h3>
+                        <p><strong>Phone:</strong> <a href="tel:03007654321">0300-7654321</a></p>
+                        <p><strong>Email:</strong> <a href="mailto:harisonetel@gmail.com">harisonetel@gmail.com</a></p>
+                        <p><strong>Location:</strong> Gulberg III, Lahore</p>
+                        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1600&q=80" alt="Legal books and scales of justice" style="width:100%; height: auto; border-radius: 8px; margin-top: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
+                    </div>
+                    <div class="contact-form">
+                        <h3>Send Us a Message</h3>
+                        <form action="#" method="POST">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject">
+
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+
+                            <button type="submit">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 Khan & Partners Legal Associates. All rights reserved.</p>
+            <div class="contact-footer-links">
+                <a href="tel:03007654321">Phone: 0300-7654321</a>
+                <a href="mailto:harisonetel@gmail.com">Email: harisonetel@gmail.com</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links is handled by CSS scroll-behavior: smooth;
+        // This JS is for the mobile hamburger menu only.
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.querySelector('.hamburger');
+            const navbar = document.querySelector('.navbar');
+            const navLinks = document.querySelectorAll('.navbar nav a');
+
+            hamburger.addEventListener('click', () => {
+                navbar.classList.toggle('open');
+            });
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navbar.classList.contains('open')) {
+                        navbar.classList.remove('open');
+                    }
+                });
+            });
+
+            // FAQ Accordion functionality
+            const faqQuestions = document.querySelectorAll('.faq-question');
+
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const parentItem = question.closest('.faq-item');
+                    parentItem.classList.toggle('active');
+
+                    // Close other open FAQ items if desired
+                    // faqQuestions.forEach(item => {
+                    //     if (item !== question && item.closest('.faq-item').classList.contains('active')) {
+                    //         item.closest('.faq-item').classList.remove('active');
+                    //     }
+                    // });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
